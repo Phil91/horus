@@ -1,0 +1,20 @@
+name: Rust code quality
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+      - uses: rust-lang/actions/setup-rust@v1
+        with:
+          rust-version: stable
+      - uses: peter-evans/cargo-audit@v1
+      - uses: marketplace/actions/clippy@v2
+      - uses: marketplace/actions/rustfmt@v2

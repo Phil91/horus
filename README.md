@@ -1,5 +1,7 @@
 # 🦅 horus
 
+[![Build](https://github.com/Phil91/horus/actions/workflows/quality.yml/badge.svg)](https://github.com/Phil91/horus/actions/workflows/quality.yml)
+
 `horus` as the name suggests is a HOliday helper for RUSt.
 
 ## Contents
@@ -8,6 +10,8 @@
 - [Credits](https://github.com/Phil91/horus#credits)
 
 ## Outlook
+
+Horus will be published as a crate soon.
 
 A lot more providers will be added soon. There will be [issues](https://github.com/Phil91/horus/issues) with some future ideas.
 All contributions are appreciated.

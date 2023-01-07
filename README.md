@@ -19,3 +19,4 @@ Until a stable version 1.0 is available, new features will be introduced, existi
 ## Credits
 
 - since this project is strongly based on Nager.Date a huge shoutout goes out to [Nager.Date](https://github.com/nager/Nager.Date)
+- this crate uses [Chrono](https://github.com/chronotope/chrono) for datetime handling

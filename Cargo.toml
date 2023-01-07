@@ -1,24 +1,20 @@
 [package]
 name = "horus"
-version = "0.0.1"
+version = "0.1.0"
+description = "HOliday helper for RUSt"
 authors = ["Phil91 <info@philschneider.de>"]
 edition = "2021"
 license = "MIT"
-description = "Rust holiday helper"
 readme = "README.md"
 homepage = "https://github.com/Phil91/horus"
 repository = "https://github.com/Phil91/horus"
-keywords = ["date", "utility"]
+keywords = ["date", "holidays", "vacation"]
 categories = ["date-and-time"]
+
+[lib]
+name = "horus"
 
 [dependencies]
 chrono = "0.4"
 serde = { version = "1.0", features = ["derive"] }
 lazy_static = "1.4.0"
-
-# [profile.release]
-# strip = true
-
-[[bin]]
-name = "horus"
-path = "src/lib.rs"

@@ -14,12 +14,13 @@ pub struct PublicHoliday {
 }
 
 impl PublicHoliday {
+	#[allow(clippy::too_many_arguments)]
 	pub fn new_fixed(
 		year: i32,
 		month: u32,
 		day: u32,
-		local_name: String,
-		name: String,
+		local_name: &str,
+		name: &str,
 		country_code: CountryCode,
 		launch_year: Option<i32>,
 		counties: Option<Vec<String>>,
@@ -28,8 +29,8 @@ impl PublicHoliday {
 		let date = Utc.with_ymd_and_hms(year, month, day, 0, 0, 0).unwrap();
 		PublicHoliday {
 			date,
-			local_name,
-			name,
+			local_name: local_name.to_string(),
+			name: name.to_string(),
 			country_code,
 			fixed: true,
 			counties,
@@ -40,8 +41,8 @@ impl PublicHoliday {
 
 	pub fn new_non_fixed(
 		date: DateTime<Utc>,
-		local_name: String,
-		name: String,
+		local_name: &str,
+		name: &str,
 		country_code: CountryCode,
 		launch_year: Option<i32>,
 		counties: Option<Vec<String>>,
@@ -49,8 +50,8 @@ impl PublicHoliday {
 	) -> Self {
 		PublicHoliday {
 			date,
-			local_name,
-			name,
+			local_name: local_name.to_string(),
+			name: name.to_string(),
 			country_code,
 			fixed: false,
 			counties,
@@ -89,7 +90,7 @@ impl std::fmt::Display for PublicHoliday {
 mod tests {
 	use chrono::Utc;
 
-	use crate::modules::types::{countrycode::CountryCode, publicholidaytype::PublicHolidayType};
+	use crate::types::{countrycode::CountryCode, publicholidaytype::PublicHolidayType};
 
 	use super::PublicHoliday;
 
@@ -97,8 +98,8 @@ mod tests {
 	fn test_set_counties() {
 		let mut holiday = PublicHoliday::new_non_fixed(
 			Utc::now(),
-			"test".to_string(),
-			"test name".to_string(),
+			"test",
+			"test name",
 			CountryCode::DE,
 			Some(2022),
 			None,
@@ -114,8 +115,8 @@ mod tests {
 	fn test_set_holiday_type() {
 		let mut holiday = PublicHoliday::new_non_fixed(
 			Utc::now(),
-			"test".to_string(),
-			"test name".to_string(),
+			"test",
+			"test name",
 			CountryCode::DE,
 			Some(2022),
 			None,
@@ -130,8 +131,8 @@ mod tests {
 	fn test_set_launch_year() {
 		let mut holiday = PublicHoliday::new_non_fixed(
 			Utc::now(),
-			"test".to_string(),
-			"test name".to_string(),
+			"test",
+			"test name",
 			CountryCode::DE,
 			None,
 			None,

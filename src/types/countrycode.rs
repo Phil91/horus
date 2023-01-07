@@ -1,5 +1,5 @@
 /// Supported Country Codes (ISO 3166-1 ALPHA-2)
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum CountryCode {
 	/// Andorra
 	AD,

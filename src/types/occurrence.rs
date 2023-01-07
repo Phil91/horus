@@ -1,3 +1,4 @@
+#[derive(Debug, PartialEq)]
 pub enum Occurrence {
 	// First
 	First = 1,
@@ -7,4 +8,6 @@ pub enum Occurrence {
 	Third = 3,
 	// Fourth
 	Fourth = 4,
+	// Sometimes a month has a weekday 5 days
+	Fifth = 5,
 }

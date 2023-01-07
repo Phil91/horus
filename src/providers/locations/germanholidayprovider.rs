@@ -2,11 +2,10 @@ use std::collections::HashMap;
 
 use chrono::{Duration, TimeZone, Utc};
 
-use crate::modules::types::{
-	countrycode::CountryCode, publicholiday::PublicHoliday, publicholidaytype::PublicHolidayType,
+use crate::{
+	providers::base::catholicprovider::CatholicProvider,
+	types::{countrycode::CountryCode, publicholiday::PublicHoliday, publicholidaytype::PublicHolidayType},
 };
-
-use super::base::catholicprovider::CatholicProvider;
 
 pub struct GermanHolidayProvider {}
 
@@ -15,7 +14,7 @@ impl GermanHolidayProvider {
 
 	/// Gets a hashmap of the available counties of germany
 	pub fn get_counties() -> HashMap<String, String> {
-		return HashMap::from([
+		HashMap::from([
 			("DE-BW".to_string(), "Baden-Württemberg".to_string()),
 			("DE-BY".to_string(), "Bayern".to_string()),
 			("DE-BE".to_string(), "Berlin".to_string()),
@@ -32,7 +31,7 @@ impl GermanHolidayProvider {
 			("DE-ST".to_string(), "Sachsen-Anhalt".to_string()),
 			("DE-SH".to_string(), "Schleswig-Holstein".to_string()),
 			("DE-TH".to_string(), "Thüringen".to_string()),
-		]);
+		])
 	}
 
 	/// .
@@ -41,42 +40,43 @@ impl GermanHolidayProvider {
 	///
 	/// Panics if .
 	pub fn get_holidays(year: i32) -> Vec<PublicHoliday> {
-		let mut holidays = Vec::new();
-		holidays.push(PublicHoliday::new_fixed(
-			year,
-			1,
-			1,
-			"Neujahr".to_string(),
-			"New Year's Day".to_string(),
-			Self::COUNTRYCODE,
-			Some(1967),
-			None,
-			PublicHolidayType::Public,
-		));
-		holidays.push(PublicHoliday::new_fixed(
-			year,
-			1,
-			6,
-			"Heilige Drei Könige".to_string(),
-			"Epiphany".to_string(),
-			Self::COUNTRYCODE,
-			Some(1967),
-			Some(vec!["DE-BW".to_string(), "DE-BY".to_string(), "DE-ST".to_string()]),
-			PublicHolidayType::Public,
-		));
-		holidays.push(PublicHoliday::new_fixed(
-			year,
-			3,
-			8,
-			"Internationaler Frauentag".to_string(),
-			"International Women's Day".to_string(),
-			Self::COUNTRYCODE,
-			Some(2019),
-			Some(vec!["DE-BE".to_string()]),
-			PublicHolidayType::Public,
-		));
-		holidays.push(CatholicProvider::good_friday("Karfreitag", year, Self::COUNTRYCODE));
-		holidays.push(CatholicProvider::easter_sunday("Ostersonntag", 2022, Self::COUNTRYCODE));
+		let mut holidays = vec![
+			PublicHoliday::new_fixed(
+				year,
+				1,
+				1,
+				"Neujahr",
+				"New Year's Day",
+				Self::COUNTRYCODE,
+				Some(1967),
+				None,
+				PublicHolidayType::Public,
+			),
+			PublicHoliday::new_fixed(
+				year,
+				1,
+				6,
+				"Heilige Drei Könige",
+				"Epiphany",
+				Self::COUNTRYCODE,
+				Some(1967),
+				Some(vec!["DE-BW".to_string(), "DE-BY".to_string(), "DE-ST".to_string()]),
+				PublicHolidayType::Public,
+			),
+			PublicHoliday::new_fixed(
+				year,
+				3,
+				8,
+				"Internationaler Frauentag",
+				"International Women's Day",
+				Self::COUNTRYCODE,
+				Some(2019),
+				Some(vec!["DE-BE".to_string()]),
+				PublicHolidayType::Public,
+			),
+			CatholicProvider::good_friday("Karfreitag", year, Self::COUNTRYCODE),
+			CatholicProvider::easter_sunday("Ostersonntag", 2022, Self::COUNTRYCODE),
+		];
 		let holiday_length = &holidays.len();
 		if let Some(holiday) = holidays.get_mut(*holiday_length) {
 			holiday.set_counties(vec!["DE-BB".to_string(), "DE-HE".to_string()]);
@@ -90,8 +90,8 @@ impl GermanHolidayProvider {
 			year,
 			5,
 			1,
-			"Tag der Arbeit".to_string(),
-			"Labour Day".to_string(),
+			"Tag der Arbeit",
+			"Labour Day",
 			Self::COUNTRYCODE,
 			None,
 			None,
@@ -128,8 +128,8 @@ impl GermanHolidayProvider {
 			year,
 			8,
 			15,
-			"Mariä Himmelfahrt".to_string(),
-			"Assumption Day".to_string(),
+			"Mariä Himmelfahrt",
+			"Assumption Day",
 			Self::COUNTRYCODE,
 			None,
 			Some(vec!["DE-SL".to_string()]),
@@ -139,8 +139,8 @@ impl GermanHolidayProvider {
 			year,
 			9,
 			20,
-			"Weltkindertag".to_string(),
-			"World Children's Day".to_string(),
+			"Weltkindertag",
+			"World Children's Day",
 			Self::COUNTRYCODE,
 			Some(2019),
 			Some(vec!["DE-TH".to_string()]),
@@ -150,8 +150,8 @@ impl GermanHolidayProvider {
 			year,
 			10,
 			3,
-			"Tag der Deutschen Einheit".to_string(),
-			"German Unity Day".to_string(),
+			"Tag der Deutschen Einheit",
+			"German Unity Day",
 			Self::COUNTRYCODE,
 			None,
 			None,
@@ -161,8 +161,8 @@ impl GermanHolidayProvider {
 			year,
 			11,
 			1,
-			"Allerheiligen".to_string(),
-			"All Saints' Day".to_string(),
+			"Allerheiligen",
+			"All Saints' Day",
 			Self::COUNTRYCODE,
 			None,
 			Some(vec![
@@ -178,8 +178,8 @@ impl GermanHolidayProvider {
 			year,
 			12,
 			25,
-			"Erster Weihnachtstag".to_string(),
-			"Christmas Day".to_string(),
+			"Erster Weihnachtstag",
+			"Christmas Day",
 			Self::COUNTRYCODE,
 			None,
 			None,
@@ -189,8 +189,8 @@ impl GermanHolidayProvider {
 			year,
 			12,
 			26,
-			"Zweiter Weihnachtstag".to_string(),
-			"St. Stephen's Day".to_string(),
+			"Zweiter Weihnachtstag",
+			"St. Stephen's Day",
 			Self::COUNTRYCODE,
 			None,
 			None,
@@ -198,25 +198,25 @@ impl GermanHolidayProvider {
 		));
 
 		let prayer_day = Self::get_prayer_day(year, Self::COUNTRYCODE);
-		if prayer_day.is_some() {
-			holidays.push(prayer_day.unwrap());
+		if let Some(prayer_day) = prayer_day {
+			holidays.push(prayer_day);
 		}
 
-		let liberation_day = Self::get_liberation_day(year, Self::COUNTRYCODE);
-		if liberation_day.is_some() {
-			holidays.push(liberation_day.unwrap());
+		let liberation_day = Self::get_liberation_day(year);
+		if let Some(liberation_day) = liberation_day {
+			holidays.push(liberation_day);
 		}
 
 		holidays.push(Self::get_reformation_day(year, Self::COUNTRYCODE));
 
 		holidays.sort_by(|a, b| a.date.cmp(&b.date));
 
-		return holidays;
+		holidays
 	}
 
 	fn get_reformation_day(year: i32, country_code: CountryCode) -> PublicHoliday {
-		let local_name = "Reformationstag".to_string();
-		let english_name = "Reformation Day".to_string();
+		let local_name = "Reformationstag";
+		let english_name = "Reformation Day";
 
 		if year == 2017 {
 			//In commemoration of the 500th anniversary of the beginning of the Reformation, it was unique as a whole German holiday
@@ -265,10 +265,10 @@ impl GermanHolidayProvider {
 
 	fn get_prayer_day(year: i32, country_code: CountryCode) -> Option<PublicHoliday> {
 		let day_of_prayer = CatholicProvider::advent_sunday(year) - Duration::days(11);
-		let local_name = "Buß- und Bettag".to_string();
-		let english_name = "Repentance and Prayer Day".to_string();
+		let local_name = "Buß- und Bettag";
+		let english_name = "Repentance and Prayer Day";
 
-		if year >= 1934 && year < 1939 {
+		if (1934..1939).contains(&year) {
 			Some(PublicHoliday::new_non_fixed(
 				day_of_prayer,
 				local_name,
@@ -278,7 +278,7 @@ impl GermanHolidayProvider {
 				None,
 				PublicHolidayType::Public,
 			))
-		} else if year >= 1945 && year <= 1980 {
+		} else if (1945..1980).contains(&year) {
 			Some(PublicHoliday::new_non_fixed(
 				day_of_prayer,
 				local_name,
@@ -299,7 +299,7 @@ impl GermanHolidayProvider {
 				]),
 				PublicHolidayType::Public,
 			))
-		} else if year >= 1981 && year <= 1989 {
+		} else if (1981..1989).contains(&year) {
 			Some(PublicHoliday::new_non_fixed(
 				day_of_prayer,
 				local_name,
@@ -321,7 +321,7 @@ impl GermanHolidayProvider {
 				]),
 				PublicHolidayType::Public,
 			))
-		} else if year >= 1990 && year <= 1994 {
+		} else if (1990..1994).contains(&year) {
 			Some(PublicHoliday::new_non_fixed(
 				day_of_prayer,
 				local_name,
@@ -346,17 +346,17 @@ impl GermanHolidayProvider {
 		}
 	}
 
-	fn get_liberation_day(year: i32, country_code: CountryCode) -> Option<PublicHoliday> {
+	fn get_liberation_day(year: i32) -> Option<PublicHoliday> {
 		let day_of_prayer = Utc.with_ymd_and_hms(2020, 5, 8, 0, 0, 0).unwrap();
-		let local_name = "Tag der Befreiung".to_string();
-		let english_name = "Liberation Day".to_string();
+		let local_name = "Tag der Befreiung";
+		let english_name = "Liberation Day";
 
 		if year == 2020 {
 			Some(PublicHoliday::new_non_fixed(
 				day_of_prayer,
 				local_name,
 				english_name,
-				country_code,
+				Self::COUNTRYCODE,
 				None,
 				Some(vec!["DE-BE".to_string()]),
 				PublicHolidayType::Public,
